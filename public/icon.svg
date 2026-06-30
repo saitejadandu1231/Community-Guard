@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="120" fill="#0f172a"/>
+  <!-- Elegant Shield/Community Guard symbol -->
+  <path d="M256 70 L390 125 V250 C390 350 256 430 256 430 C256 430 122 350 122 250 V125 Z" fill="#059669"/>
+  <path d="M256 90 L370 138 V240 C370 325 256 395 256 395 C256 395 142 325 142 240 V138 Z" fill="#10b981"/>
+  <!-- Interactive eye / city map pin hybrid node -->
+  <circle cx="256" cy="200" r="45" fill="#ffffff" />
+  <circle cx="256" cy="200" r="22" fill="#0f172a" />
+  <path d="M256 245 L256 320" stroke="#ffffff" stroke-width="16" stroke-linecap="round" />
+  <circle cx="256" cy="335" r="12" fill="#ffffff" />
+</svg>

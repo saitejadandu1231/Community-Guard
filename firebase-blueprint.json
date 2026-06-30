@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Represents a citizen, officer, or administrator on the platform",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "avatar": { "type": "string" },
+        "role": { "type": "string", "enum": ["citizen", "officer", "admin"] },
+        "joinedAt": { "type": "string", "format": "date-time" },
+        "stats": { "type": "object" }
+      },
+      "required": ["id", "email", "name", "role", "joinedAt"]
+    },
+    "Issue": {
+      "title": "Issue",
+      "description": "A reported civic hazard or utility incident",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "reporterId": { "type": "string" },
+        "reporterName": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "severity": { "type": "string" },
+        "status": { "type": "string" },
+        "location": { "type": "object" },
+        "address": { "type": "string" },
+        "photoUrl": { "type": "string" }
+      },
+      "required": ["reporterId", "title", "description", "category", "severity", "status", "location", "address", "photoUrl"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Registered citizens and public safety personnel"
+    },
+    "/issues/{issueId}": {
+      "schema": "Issue",
+      "description": "Active city reports and routing ledger"
+    }
+  }
+}

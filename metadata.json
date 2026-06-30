@@ -1,0 +1,12 @@
+{
+  "name": "CommunityGuard",
+  "description": "Your Voice Fixes Your City. A modern civic tech platform with Gemini Vision issue auto-categorization, automated department routing, and real-time interactive heatmaps.",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

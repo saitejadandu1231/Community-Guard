@@ -1,0 +1,99 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helper Functions ---
+    function isSignedIn() { 
+      return request.auth != null; 
+    }
+    
+    function incoming() { 
+      return request.resource.data; 
+    }
+    
+    function existing() { 
+      return resource.data; 
+    }
+
+    // --- Users Collection ---
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isValidUser(incoming());
+      allow delete: if true;
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['id', 'email', 'name', 'role']) 
+        && data.id is string && data.id.size() <= 128
+        && data.email is string && data.email.size() <= 128
+        && data.name is string && data.name.size() <= 128
+        && data.role is string && (data.role == 'citizen' || data.role == 'officer' || data.role == 'admin');
+    }
+
+    // --- Issues Collection ---
+    match /issues/{issueId} {
+      allow read: if true;
+      allow create, update: if isValidIssue(incoming());
+      allow delete: if true;
+    }
+
+    function isValidIssue(data) {
+      return data.keys().hasAll(['title', 'description', 'category', 'severity', 'status'])
+        && data.title is string && data.title.size() <= 200
+        && data.description is string && data.description.size() <= 5000
+        && data.category is string && data.category.size() <= 100
+        && data.severity is string && data.severity.size() <= 50
+        && data.status is string && data.status.size() <= 50;
+    }
+
+    // --- System Alerts Collection ---
+    match /system_alerts/{alertId} {
+      allow read: if true;
+      allow create, update: if isValidSystemAlert(incoming());
+      allow delete: if true;
+    }
+
+    function isValidSystemAlert(data) {
+      return data.keys().hasAll(['title', 'message', 'type', 'active'])
+        && data.title is string && data.title.size() <= 200
+        && data.message is string && data.message.size() <= 2000
+        && data.type is string && data.type.size() <= 50
+        && data.active is bool;
+    }
+
+    // --- System Config Collection ---
+    match /system_config/{configId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // --- Departments Collection ---
+    match /departments/{deptId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // --- Sent Emails Collection ---
+    match /sent_emails/{emailId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // --- Ward Subscriptions Collection ---
+    match /ward_subscriptions/{subId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // --- Ward Alerts Log Collection ---
+    match /ward_alerts_log/{logId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}

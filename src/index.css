@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom palette matching a professional, clean light-mode dashboard */
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-900: #14532d;
+}
+
+/* Base resets or utility additions */
+body {
+  font-family: var(--font-sans);
+  background-color: #f8fafc;
+  color: #1e293b;
+  margin: 0;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
